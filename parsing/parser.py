@@ -32,4 +32,11 @@ def parse_netlist(filename):
                 'fixed': False
             }
 
-    return num_cells, num_nets, ny, nx, num_pins, components, []
+    nets = []
+    for i in range(num_cells + 1, len(lines)):
+        parts = lines[i].split()
+        count = int(parts[0])
+        net = [int(parts[j]) for j in range(1, count + 1)]
+        nets.append(net)
+
+    return num_cells, num_nets, ny, nx, num_pins, components, nets
